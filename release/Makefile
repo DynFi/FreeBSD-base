@@ -24,6 +24,8 @@
 #  NOPKG:    if set, do not distribute third-party packages
 #  NOPORTS:  if set, do not distribute ports tree
 #  NOSRC:    if set, do not distribute source tree
+#  NODOC:    if set, do not generate release documentation
+#  WITH_PKGBASE:  if set, produce a pkgbase release image
 #  WITH_DVD: if set, generate dvd1.iso
 #  WITH_COMPRESSED_IMAGES: if set, compress installation images with xz(1)
 #		(uncompressed images are not removed)
@@ -37,6 +39,7 @@
 WORLDDIR?=	${.CURDIR}/..
 PORTSDIR?=	/usr/ports
 RELNOTES_LANG?= en_US.ISO8859-1
+REPODIR?=	${OBJROOT}repo
 
 .if !defined(TARGET) || empty(TARGET)
 TARGET=		${MACHINE}
@@ -149,21 +152,63 @@ ports.txz:
 	    --exclude 'usr/ports/INDEX*' --exclude work usr/ports | \
 	    ${XZ_CMD} > ${.OBJDIR}/ports.txz
 
+reldoc:
+	cd ${DOCDIR}/en_US.ISO8859-1/htdocs/releases/${REVISION}R && \
+	    env MAN4DIR=${WORLDDIR}/share/man/man4 \
+	    SVN=${SVN} \
+	    _BRANCH=${BRANCH} \
+	    ${MAKE} all install clean "FORMATS=html txt" \
+	    INSTALL_COMPRESSED='' URLS_ABSOLUTE=YES DOCDIR=${.OBJDIR}/rdoc \
+	    WEBDIR=${DOCDIR} DESTDIR=${.OBJDIR}/rdoc
+	mkdir -p reldoc
+.for i in hardware readme relnotes errata
+	ln -f ${.OBJDIR}/rdoc/${i:tl}.txt \
+		reldoc/${i:tu}.TXT
+	ln -f ${.OBJDIR}/rdoc/${i:tl}.html \
+		reldoc/${i:tu}.HTML
+.endfor
+	cp ${.OBJDIR}/rdoc/docbook.css \
+		reldoc/
+
+REPONAME!=${PKG_CMD} -o ABI_FILE=${OBJROOT}${TARGET}.${TARGET_ARCH}/usr.bin/uname/uname config abi
+
 disc1: packagesystem
 # Install system
 	mkdir -p ${.TARGET}
-	cd ${WORLDDIR} && ${IMAKE} installworld installkernel distribution \
+.if defined(WITH_PKGBASE)
+# TODO : We need to switch to create the installer data from the pkgs
+	cd ${WORLDDIR} && ${IMAKE} installkernel installworld distribution \
+	    DESTDIR=${.OBJDIR}/${.TARGET} INSTKERNNAME=kernel.GENERIC MK_AMD=no MK_AT=no \
+	    MK_INSTALLLIB=no MK_LIB32=no MK_MAIL=no \
+	    MK_TOOLCHAIN=no MK_PROFILE=no \
+	    MK_RESCUE=no MK_DICT=no \
+	    MK_KERNEL_SYMBOLS=no MK_TESTS=no MK_DEBUG_FILES=no \
+	    -DDB_FROM_SRC
+.else
+	cd ${WORLDDIR} && ${IMAKE} installkernel installworld distribution \
 	    DESTDIR=${.OBJDIR}/${.TARGET} MK_AT=no \
 	    MK_INSTALLLIB=no MK_LIB32=no MK_MAIL=no \
 	    MK_TOOLCHAIN=no MK_PROFILE=no \
 	    MK_RESCUE=no MK_DICT=no \
 	    MK_KERNEL_SYMBOLS=no MK_TESTS=no MK_DEBUG_FILES=no \
 	    -DDB_FROM_SRC
+.endif
 # Copy distfiles
 	mkdir -p ${.TARGET}/usr/freebsd-dist
+.if defined(WITH_PKGBASE)
+	mkdir ${.TARGET}/usr/freebsd-dist/${REPONAME}/
+	cp -RH ${REPODIR}/${REPONAME}/latest ${.TARGET}/usr/freebsd-dist/${REPONAME}/
+# Install pkg
+	NO_DIALOG=y WRKDIR=$$(realpath ${.TARGET})/tmp/pkg LOCALBASE=$$(realpath ${.TARGET})/usr/local/ PKG_DBDIR=$$(realpath ${.TARGET})/var/db/pkg/ PORT_DBDIR=$$(realpath ${.TARGET})/var/db/ports make -C ${PORTSDIR}/ports-mgmt/pkg install
+.else
 	for dist in MANIFEST $$(ls *.txz | grep -vE -- '(base|lib32)-dbg'); \
 	    do cp $${dist} ${.TARGET}/usr/freebsd-dist; \
 	done
+.endif
+# Copy documentation, if generated
+.if !defined(NODOC)
+	cp reldoc/* ${.TARGET}
+.endif
 # Set up installation environment
 	ln -fs /tmp/bsdinstall_etc/resolv.conf ${.TARGET}/etc/resolv.conf
 	echo sendmail_enable=\"NONE\" > ${.TARGET}/etc/rc.conf
@@ -171,6 +216,11 @@ disc1: packagesystem
 	echo vfs.mountroot.timeout=\"10\" >> ${.TARGET}/boot/loader.conf
 	echo kernels_autodetect=\"NO\" >> ${.TARGET}/boot/loader.conf
 	cp ${.CURDIR}/rc.local ${.TARGET}/etc
+.if defined(WITH_PKGBASE)
+	cp ${.CURDIR}/FreeBSD-Base.conf ${.TARGET}/etc/pkg/
+	rm ${.TARGET}/etc/pkg/FreeBSD.conf
+	/usr/sbin/kernel-select -k ${.TARGET}/boot/ switch GENERIC
+.endif
 	touch ${.TARGET}
 
 bootonly: packagesystem
@@ -234,8 +284,12 @@ mini-memstick: mini-memstick.img
 mini-memstick.img: bootonly
 	sh ${.CURDIR}/${TARGET}/make-memstick.sh bootonly ${.TARGET}
 
+.if defined(WITH_PKGBASE)
+packagesystem:
+.else
 packagesystem: base.txz kernel.txz ${EXTRA_PACKAGES}
 	sh ${.CURDIR}/scripts/make-manifest.sh *.txz > MANIFEST
+.endif
 	touch ${.TARGET}
 
 pkg-stage:
