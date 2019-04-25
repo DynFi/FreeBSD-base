@@ -22,7 +22,8 @@ SCRIPTS=auto \
 	time \
 	umount \
 	wlanconfig \
-	zfsboot
+	zfsboot \
+	pkgbase
 
 BINDIR= ${LIBEXECDIR}/bsdinstall
 
