@@ -119,6 +119,7 @@ __DEFAULT_YES_OPTIONS = \
     ISCSI \
     JAIL \
     JEMALLOC_LG_VADDR_WIDE \
+    KERNEL_SELECT \
     KDUMP \
     KVM \
     LDNS \
