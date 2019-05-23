@@ -118,6 +118,7 @@ __DEFAULT_YES_OPTIONS = \
     IPFW \
     ISCSI \
     JAIL \
+    KERNEL_SELECT \
     KDUMP \
     KVM \
     LDNS \
