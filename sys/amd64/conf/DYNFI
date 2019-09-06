@@ -1,0 +1,13 @@
+include GENERIC
+
+ident	DYNFI
+
+options		DDB
+options		IPFIREWALL_DEFAULT_TO_ACCEPT
+options		IPFIREWALL_VERBOSE
+options		IPSTEALTH
+options		MROUTING
+options		PPS_SYNC
+options		TCP_SIGNATURE
+
+device		netmap
