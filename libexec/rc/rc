@@ -38,6 +38,10 @@
 # first before contemplating any changes here.  If you do need to change
 # this file for some reason, we would like to know about it.
 
+if [ -f /usr/local/etc/rc ]; then
+	exec /usr/local/etc/rc
+fi
+
 stty status '^T' 2> /dev/null
 
 # Set shell to ignore SIGINT (2), but not children;
