@@ -152,7 +152,8 @@ trap true SIGINT	# This section is optional
 bsdinstall keymap
 
 trap error SIGINT	# Catch cntrl-C here
-bsdinstall hostname || error "Set hostname failed"
+# DynFi Not needed
+#bsdinstall hostname || error "Set hostname failed"
 
 export DISTRIBUTIONS="base.txz kernel.txz"
 if [ ${PKGBASE_INSTALL} -eq 0 && -f $BSDINSTALL_DISTDIR/MANIFEST]; then
@@ -430,24 +431,29 @@ if [ ${PKGBASE_INSTALL} -eq 0 ]; then
 	bsdinstall distextract || error "Distribution extract failed"
 else
 	bsdinstall pkgbase || error "Failed to install pkgbase"
+	bsdinstall dynfi || error "Failed to install dynfi"
 fi
 
 # Set up boot loader
 bsdinstall bootconfig || error "Failed to configure bootloader"
 
-bsdinstall rootpass || error "Could not set root password"
+# DynFi Not needed
+#bsdinstall rootpass || error "Could not set root password"
 
 trap true SIGINT	# This section is optional
 if [ "$NETCONFIG_DONE" != yes ]; then
-	bsdinstall netconfig	# Don't check for errors -- the user may cancel
+# DynFi Not needed
+#	bsdinstall netconfig	# Don't check for errors -- the user may cancel
 fi
 bsdinstall time
-bsdinstall services
-bsdinstall hardening
+# DynFi Not needed
+#bsdinstall services
+#bsdinstall hardening
 
-dialog --backtitle "FreeBSD Installer" --title "Add User Accounts" --yesno \
-    "Would you like to add users to the installed system now?" 0 0 && \
-    bsdinstall adduser
+# DynFi Not needed
+#dialog --backtitle "FreeBSD Installer" --title "Add User Accounts" --yesno \
+#    "Would you like to add users to the installed system now?" 0 0 && \
+#    bsdinstall adduser
 
 finalconfig() {
 	exec 3>&1
@@ -502,7 +508,7 @@ finalconfig() {
 }
 
 # Allow user to change his mind
-finalconfig
+#finalconfig
 
 trap error SIGINT	# SIGINT is bad again
 bsdinstall config  || error "Failed to save config"
@@ -511,15 +517,16 @@ if [ ! -z "$BSDINSTALL_FETCHDEST" ]; then
 	rm -rf "$BSDINSTALL_FETCHDEST"
 fi
 
-dialog --backtitle "FreeBSD Installer" --title "Manual Configuration" \
-    --default-button no --yesno \
-   "The installation is now finished. Before exiting the installer, would you like to open a shell in the new system to make any final manual modifications?" 0 0
-if [ $? -eq 0 ]; then
-	clear
-	echo This shell is operating in a chroot in the new system. \
-	    When finished making configuration changes, type \"exit\".
-	chroot "$BSDINSTALL_CHROOT" /bin/sh 2>&1
-fi
+# DynFi Not needed
+#dialog --backtitle "FreeBSD Installer" --title "Manual Configuration" \
+#    --default-button no --yesno \
+#   "The installation is now finished. Before exiting the installer, would you like to open a shell in the new system to make any final manu#al modifications?" 0 0
+#if [ $? -eq 0 ]; then
+#	clear
+#	echo This shell is operating in a chroot in the new system. \
+#	    When finished making configuration changes, type \"exit\".
+#	chroot "$BSDINSTALL_CHROOT" /bin/sh 2>&1
+#fi
 
 bsdinstall entropy
 bsdinstall umount
