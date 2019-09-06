@@ -1,0 +1,53 @@
+#!/bin/sh
+#-
+# Copyright (c) 2019 Emmanuel Vadot <manu@FreeBSD.Org>
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+#
+# $FreeBSD$
+#
+
+# Install pkg into the new root
+pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install pkg
+
+mkdir -p ${BSDINSTALL_CHROOT}/tmp/packages
+mount_nullfs /usr/freebsd-dist/dynfi/ ${BSDINSTALL_CHROOT}/tmp/packages
+cat > ${BSDINSTALL_CHROOT}/tmp/repo.conf <<EOF
+local: { url: file:///tmp/packages }
+EOF
+chroot ${BSDINSTALL_CHROOT} env REPOS_DIR=/tmp ASSUME_ALWAYS_YES=yes pkg install php72-opnsense-core
+rm ${BSDINSTALL_CHROOT}/tmp/repo.conf
+umount ${BSDINSTALL_CHROOT}/tmp/packages
+
+# TODO add this to the mtree files
+mkdir ${BSDINSTALL_CHROOT}/conf
+mkdir ${BSDINSTALL_CHROOT}/var/etc
+mkdir ${BSDINSTALL_CHROOT}/usr/local/etc/
+
+# TODO ?? don't know yet
+cp /conf/config.xml ${BSDINSTALL_CHROOT}/usr/local/etc/config.xml
+
+# Select the console
+echo 'boot_multicons="YES"' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
+echo 'boot_serial="YES"' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
+echo 'comconsole_speed=115200' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
+echo 'console=comconsole' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
