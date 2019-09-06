@@ -199,8 +199,9 @@ disc1: packagesystem
 	mkdir ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	cp -RH ${REPODIR}/${REPONAME}/latest ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	cp -RH ${DYNFI_REPODIR} ${.TARGET}/usr/freebsd-dist/dynfi
-# Install pkg
-	NO_DIALOG=y WRKDIR=$$(realpath ${.TARGET})/tmp/pkg LOCALBASE=$$(realpath ${.TARGET})/usr/local/ PKG_DBDIR=$$(realpath ${.TARGET})/var/db/pkg/ PORT_DBDIR=$$(realpath ${.TARGET})/var/db/ports make -C ${PORTSDIR}/ports-mgmt/pkg install
+# Install pkg, we need to set SRCCONF to /dev/null in case it contain WITHOUT_NLS
+# the ports tree doesn't like that
+	SRCCONF=/dev/null NO_DIALOG=y WRKDIR=$$(realpath ${.TARGET})/tmp/pkg LOCALBASE=$$(realpath ${.TARGET})/usr/local/ PKG_DBDIR=$$(realpath ${.TARGET})/var/db/pkg/ PORT_DBDIR=$$(realpath ${.TARGET})/var/db/ports make -C ${PORTSDIR}/ports-mgmt/pkg install
 .else
 	for dist in MANIFEST $$(ls *.txz | grep -vE -- '(base|lib32)-dbg'); \
 	    do cp $${dist} ${.TARGET}/usr/freebsd-dist; \
