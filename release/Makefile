@@ -198,6 +198,7 @@ disc1: packagesystem
 .if defined(WITH_PKGBASE)
 	mkdir ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	cp -RH ${REPODIR}/${REPONAME}/latest ${.TARGET}/usr/freebsd-dist/${REPONAME}/
+	cp -RH ${DYNFI_REPODIR} ${.TARGET}/usr/freebsd-dist/dynfi
 # Install pkg
 	NO_DIALOG=y WRKDIR=$$(realpath ${.TARGET})/tmp/pkg LOCALBASE=$$(realpath ${.TARGET})/usr/local/ PKG_DBDIR=$$(realpath ${.TARGET})/var/db/pkg/ PORT_DBDIR=$$(realpath ${.TARGET})/var/db/ports make -C ${PORTSDIR}/ports-mgmt/pkg install
 .else
@@ -218,8 +219,16 @@ disc1: packagesystem
 	cp ${.CURDIR}/rc.local ${.TARGET}/etc
 .if defined(WITH_PKGBASE)
 	cp ${.CURDIR}/FreeBSD-Base.conf ${.TARGET}/etc/pkg/
+	cp ${.CURDIR}/DynFi.conf ${.TARGET}/etc/pkg/
+	mkdir ${.TARGET}/conf
+	cp ${.CURDIR}/config.xml ${.TARGET}/conf
 	rm ${.TARGET}/etc/pkg/FreeBSD.conf
 	/usr/sbin/kernel-select -k ${.TARGET}/boot/ switch GENERIC
+	# DynFi
+	echo 'boot_multicons="YES"' >> ${.TARGET}/boot/loader.conf.local
+	echo 'boot_serial="YES"' >> ${.TARGET}/boot/loader.conf.local
+	echo 'comconsole_speed=115200' >> ${.TARGET}/boot/loader.conf.local
+	echo 'console=comconsole' >> ${.TARGET}/boot/loader.conf.local
 .endif
 	touch ${.TARGET}
 
