@@ -77,6 +77,8 @@ pkg_install() {
 }
 
 if [ "${install_base}" == "yes" ]; then
+	pkg_list="FreeBSD-clibs FreeBSD-runtime"
+	pkg_install "Mandatory packages"
 	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-*' | grep -vE "\-kernel|\-lib32|\-debug|\-development|\-profile" | awk '{print $1}')
 	pkg_install "Base"
 fi
