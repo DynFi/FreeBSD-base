@@ -25,6 +25,7 @@ SCRIPTS=auto \
 	zfsboot \
 	pkgbase
 
+SCRIPTS+=	dynfi
 BINDIR= ${LIBEXECDIR}/bsdinstall
 
 MAN=
