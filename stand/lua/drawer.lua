@@ -478,8 +478,8 @@ shift = default_shift
 
 -- Module exports
 drawer.default_brand = 'fbsd'
-drawer.default_color_logodef = 'orb'
-drawer.default_bw_logodef = 'orbbw'
+drawer.default_color_logodef = 'dynfi'
+drawer.default_bw_logodef = 'dynfi'
 -- For when things go terribly wrong; this def should be present here in the
 -- drawer module in case it's a filesystem issue.
 drawer.default_fallback_logodef = 'none'
