@@ -46,7 +46,8 @@ for i in $FILESYSTEMS; do
 	mkdir -p $i 2>/dev/null
 	MNTERROR=`mount -F $TMP_FSTAB $i 2>&1`
 	if [ $? -ne 0 ]; then
-		bsddialog --backtitle "$OSNAME Installer" --title "Error" \
+		#bsddialog --backtitle "$OSNAME Installer" --title "Error" \
+		bsddialog --backtitle "DynFi Installer" --title "Error" \
 		    --msgbox "Error mounting partition $i:\n$MNTERROR" 0 0
 		exit 1
 	fi
