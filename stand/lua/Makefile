@@ -25,6 +25,8 @@ FILES=	cli.lua \
 	gfx-fbsdbw.lua \
 	gfx-orb.lua \
 	gfx-orbbw.lua \
+	logo-dynfi.lua \
+	logo-octopus.lua \
 	menu.lua \
 	password.lua \
 	screen.lua
