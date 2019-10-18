@@ -45,7 +45,8 @@ for dist in $DISTRIBUTIONS; do
 	for i in $DISTRIBUTIONS; do
 		items="$items $i `eval echo \\\${$(dist_to_statusvar $i):--11}`"
 	done
-	bsddialog --backtitle "$OSNAME Installer" --title "Checksum Verification" \
+	#bsddialog --backtitle "$OSNAME Installer" --title "Checksum Verification" \
+	bsddialog --backtitle "DynFi Installer" --title "Checksum Verification" \
 	    --mixedgauge "\nVerifying checksums of selected distributions.\n" \
 	    0 0 $percentage  -- $items
 
@@ -72,11 +73,19 @@ for dist in $DISTRIBUTIONS; do
 		eval "$statusvar=-2"
 		case $(/bin/freebsd-version -u) in
 		*-ALPHA*|*-CURRENT|*-STABLE|*-PRERELEASE)
+<<<<<<< HEAD
 			bsddialog --backtitle "$OSNAME Installer" --title "Error" \
 			    --msgbox "The checksum for $dist does not match. It may have become corrupted, or it may be from a newer version of $OSNAME. Please check for a newer snapshot." 0 0
 			;;
 		*)
 			bsddialog --backtitle "$OSNAME Installer" --title "Error" \
+=======
+			dialog --backtitle "DynFi Installer" --title "Error" \
+			    --msgbox "The checksum for $dist does not match. It may have become corrupted, or it may be from a newer version of FreeBSD. Please check for a newer snapshot." 0 0
+			;;
+		*)
+			dialog --backtitle "DynFi Installer" --title "Error" \
+>>>>>>> a863b9971895 (dynfi: Rename the title to DynFi Installer in the installer)
 			    --msgbox "The checksum for $dist does not match. It may have become corrupted, and should be redownloaded." 0 0
 			;;
 		esac
