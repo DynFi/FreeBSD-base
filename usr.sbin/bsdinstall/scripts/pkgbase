@@ -29,7 +29,7 @@
 # Choose the sets to install
 
 exec 3>&1
-FEATURES=$( dialog --backtitle "FreeBSD Installer" \
+FEATURES=$( dialog --backtitle "DynFi Installer" \
     --title "Base sets" --nocancel --separate-output \
     --checklist "Choose system sets to install:" \
     0 0 0 \
@@ -70,7 +70,7 @@ pkg_install() {
 	total=$(echo ${pkg_list} | wc -w)
 	for item in ${pkg_list}; do
 		percentage=$((100 * n/total))
-		dialog --backtitle "FreeBSD Installer" --title "Installing $1 packages" --mixedgauge "Installing ${item}"  0 0 $percentage
+		dialog --backtitle "DynFi Installer" --title "Installing $1 packages" --mixedgauge "Installing ${item}"  0 0 $percentage
 		pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install ${item} >/dev/null 2>&1
 		n=$((n + 1))
 	done
@@ -145,7 +145,7 @@ if [ ! -z "${kernel_list}" ]; then
 
 	if [ "${nkernels}" -gt 1 ]; then
 		exec 3>&1
-		KERN=$(dialog --backtitle "FreeBSD Installer" \
+		KERN=$(dialog --backtitle "DynFi Installer" \
 			      --title "Kernel Selection" --nocancel \
 			      --radiolist "Choose kernel to enable:" \
 			      0 0 0 ${dialogarg} \
