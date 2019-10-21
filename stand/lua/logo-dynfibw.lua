@@ -45,7 +45,7 @@ local dynfi_logo = {
 "                                               "
 }
 
-drawer.addLogo("dynfi", {
+drawer.addLogo("dynfibw", {
 	graphic = dynfi_logo,
 	shift = {x = 5, y = 4},
 })
