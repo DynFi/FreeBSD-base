@@ -34,7 +34,7 @@ mount_nullfs /usr/freebsd-dist/dynfi/ ${BSDINSTALL_CHROOT}/tmp/packages
 cat > ${BSDINSTALL_CHROOT}/tmp/repo.conf <<EOF
 local: { url: file:///tmp/packages }
 EOF
-chroot ${BSDINSTALL_CHROOT} env REPOS_DIR=/tmp ASSUME_ALWAYS_YES=yes pkg install php72-opnsense-core
+chroot ${BSDINSTALL_CHROOT} env REPOS_DIR=/tmp ASSUME_ALWAYS_YES=yes pkg install php72-opnsense-core python3
 rm ${BSDINSTALL_CHROOT}/tmp/repo.conf
 umount ${BSDINSTALL_CHROOT}/tmp/packages
 
