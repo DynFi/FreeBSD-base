@@ -206,7 +206,7 @@
   </sysctl>
   <system>
     <optimization>normal</optimization>
-    <hostname>OPNsense</hostname>
+    <hostname>DynFi</hostname>
     <domain>localdomain</domain>
     <dnsallowoverride/>
     <group>
@@ -222,7 +222,7 @@
       <descr><![CDATA[System Administrator]]></descr>
       <scope>system</scope>
       <groupname>admins</groupname>
-      <password>$2y$10$YRVoF4SgskIsrXOvOQjGieB9XqHPRra9R7d80B3BZdbY/j21TwBfS</password>
+      <password>$2y$10$7stKfD4n8xjLlSYazPQXReEOC0upXR/SWWaGWqwORLpiXVaJMUXAy</password>
       <uid>0</uid>
     </user>
     <nextuid>2000</nextuid>
