@@ -39,9 +39,9 @@ rm ${BSDINSTALL_CHROOT}/tmp/repo.conf
 umount ${BSDINSTALL_CHROOT}/tmp/packages
 
 # TODO add this to the mtree files
-mkdir ${BSDINSTALL_CHROOT}/conf
-mkdir ${BSDINSTALL_CHROOT}/var/etc
-mkdir ${BSDINSTALL_CHROOT}/usr/local/etc/
+mkdir -p ${BSDINSTALL_CHROOT}/conf
+mkdir -p ${BSDINSTALL_CHROOT}/var/etc
+mkdir -p ${BSDINSTALL_CHROOT}/usr/local/etc/
 
 # TODO ?? don't know yet
 cp /conf/config.xml ${BSDINSTALL_CHROOT}/usr/local/etc/config.xml
