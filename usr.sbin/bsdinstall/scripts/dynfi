@@ -45,6 +45,7 @@ mkdir -p ${BSDINSTALL_CHROOT}/usr/local/etc/
 
 # TODO ?? don't know yet
 cp /conf/config.xml ${BSDINSTALL_CHROOT}/usr/local/etc/config.xml
+cp ${BSDINSTALL_CHROOT}/usr/local/etc/pkg/repos/FreeBSD.conf.sample ${BSDINSTALL_CHROOT}/usr/local/etc/pkg/repos/FreeBSD.conf
 
 # Select the console
 echo 'boot_multicons="YES"' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
