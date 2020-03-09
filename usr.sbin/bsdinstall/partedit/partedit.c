@@ -93,8 +93,10 @@ main(int argc, const char **argv)
 	if (bsddialog_init() == BSDDIALOG_ERROR)
 		err(1, "%s", bsddialog_geterror());
 	bsddialog_initconf(&conf);
-	if (!sade_mode)
-		bsddialog_backtitle(&conf, OSNAME " Installer");
+	if (!sade_mode) {
+		//bsddialog_backtitle(&conf, OSNAME " Installer");
+		bsddialog_backtitle(&conf, "DynFi Installer");
+	}
 	i = 0;
 
 	/* Revert changes on SIGINT */
