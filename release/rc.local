@@ -71,7 +71,7 @@ $DIALOG_OK)	# Install
 	trap true SIGINT	# Ignore cntrl-C here
 	bsdinstall
 	if [ $? -eq 0 ]; then
-		dialog --backtitle "DynFi Installer" --title "Complete" --yes-label "Reboot" --no-label "Live CD" --yesno "Installation of FreeBSD complete! Would you like to reboot into the installed system now?" 0 0 && reboot
+		dialog --backtitle "DynFi Installer" --title "Complete" --yes-label "Reboot" --no-label "Live CD" --yesno "Installation of DynFi complete! Would you like to reboot into the installed system now?" 0 0 && reboot
 	else
 		. /etc/rc.local
 	fi
