@@ -252,8 +252,9 @@ disc1: packagesystem
 	mkdir ${.TARGET}/conf
 	cp ${.CURDIR}/config.xml ${.TARGET}/conf
 	rm ${.TARGET}/etc/pkg/FreeBSD.conf
-	/usr/sbin/kernel-select -k ${.TARGET}/boot/ switch GENERIC
 	# DynFi
+	echo 'kernel="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf.local
+	echo 'module_path="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf
 	echo 'boot_multicons="YES"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'boot_serial="YES"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'comconsole_speed=115200' >> ${.TARGET}/boot/loader.conf.local
