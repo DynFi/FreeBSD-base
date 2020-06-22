@@ -259,7 +259,6 @@ disc1: packagesystem
 	echo 'boot_serial="YES"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'comconsole_speed=115200' >> ${.TARGET}/boot/loader.conf.local
 	echo 'console=comconsole' >> ${.TARGET}/boot/loader.conf.local
-	echo 'hw.usb.no_boot_wait=0' >> ${.TARGET}/boot/loader.conf.local
 	echo 'kern.cam.boot_delay="10000"' >> ${.TARGET}/boot/loader.conf.local
 .endif
 	touch ${.TARGET}
