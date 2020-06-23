@@ -228,16 +228,22 @@ disc1: packagesystem
 	cp ${.CURDIR}/FreeBSD-Base.conf ${.TARGET}/etc/pkg/
 	cp ${.CURDIR}/DynFi.conf ${.TARGET}/etc/pkg/
 	mkdir ${.TARGET}/conf
-	cp ${.CURDIR}/config.xml ${.TARGET}/conf
+.if defined(WITH_SERIAL)
+	cp ${.CURDIR}/config_serial.xml ${.TARGET}/conf
+.else
+	cp ${.CURDIR}/config_vga.xml ${.TARGET}/conf
+.endif
 	rm ${.TARGET}/etc/pkg/FreeBSD.conf
 	# DynFi
 	echo 'kernel="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'module_path="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf
 	echo 'boot_multicons="YES"' >> ${.TARGET}/boot/loader.conf.local
+	echo 'kern.cam.boot_delay="10000"' >> ${.TARGET}/boot/loader.conf.local
+.if defined(WITH_SERIAL)
 	echo 'boot_serial="YES"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'comconsole_speed=115200' >> ${.TARGET}/boot/loader.conf.local
 	echo 'console=comconsole' >> ${.TARGET}/boot/loader.conf.local
-	echo 'kern.cam.boot_delay="10000"' >> ${.TARGET}/boot/loader.conf.local
+.endif
 .endif
 	touch ${.TARGET}
 
