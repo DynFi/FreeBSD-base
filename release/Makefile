@@ -217,9 +217,11 @@ disc1: packagesystem
 	cp -RH ${DYNFI_REPODIR} ${.TARGET}/usr/freebsd-dist/dynfi
 # Install pkg, we need to set SRCCONF to /dev/null in case it contain WITHOUT_NLS
 # the ports tree doesn't like that
-	WRKDIR=$$(realpath ${.TARGET})/tmp/pkg
-	rm -rf ${WRKDIR}
-	env -i PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin SRCCONF=/dev/null NO_DIALOG=y WRKDIR=${WRKDIR} LOCALBASE=$$(realpath ${.TARGET})/usr/local/ PKG_DBDIR=$$(realpath ${.TARGET})/var/db/pkg/ PORT_DBDIR=$$(realpath ${.TARGET})/var/db/ports make -C ${PORTSDIR}/ports-mgmt/pkg clean install
+# HACK: lately pkg fails to compile in weird way, do a hack version of extracting in
+# and replace /usr/sbin/pkg with a link
+	tar xzf ${.TARGET}/usr/freebsd-dist/dynfi/Latest/pkg.txz -C $$(realpath ${.TARGET})
+	rm $$(realpath ${.TARGET})/usr/sbin/pkg
+	ln -s /usr/local/sbin/pkg $$(realpath ${.TARGET})/usr/sbin/pkg
 .else
 	for dist in MANIFEST $$(ls *.txz | grep -vE -- '(base|lib32)-dbg'); \
 	    do cp $${dist} ${.TARGET}/usr/freebsd-dist; \
