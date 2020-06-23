@@ -253,9 +253,9 @@ disc1: packagesystem
 	cp ${.CURDIR}/DynFi.conf ${.TARGET}/etc/pkg/
 	mkdir ${.TARGET}/conf
 .if defined(WITH_SERIAL)
-	cp ${.CURDIR}/config_serial.xml ${.TARGET}/conf
+	cp ${.CURDIR}/config_serial.xml ${.TARGET}/conf/config.xml
 .else
-	cp ${.CURDIR}/config_vga.xml ${.TARGET}/conf
+	cp ${.CURDIR}/config_vga.xml ${.TARGET}/conf/config.xml
 .endif
 	rm ${.TARGET}/etc/pkg/FreeBSD.conf
 	# DynFi
