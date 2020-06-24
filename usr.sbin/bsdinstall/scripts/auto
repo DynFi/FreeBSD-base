@@ -352,7 +352,7 @@ esac
 #	;;
 #esac
 # Force UFS
-bdinstall autopart || error "Partitioning error"
+bsdinstall autopart || error "Partitioning error"
 bsdinstall mount || error "Failed to mount filesystem"
 
 if [ ${PKGBASE_INSTALL} -eq 0 && ! -z "$FETCH_DISTRIBUTIONS" ]; then
