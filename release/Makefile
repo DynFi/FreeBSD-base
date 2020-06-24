@@ -215,8 +215,8 @@ disc1: packagesystem
 	mkdir ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	cp -RH ${REPODIR}/${REPONAME}/latest ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	# Dynfi: Remove packages that won't be installed and recreate the repo
-	rm ${.TARGET}/usr/freebsd-dist/${REPONAME}/*-dev*
-	pkg repo ${.TARGET}/usr/freebsd-dist/${REPONAME}/
+	rm ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/*-dev*
+	pkg repo ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/
 	# Dynfi: Copy the result of poudriere bulk
 	cp -RH ${DYNFI_REPODIR} ${.TARGET}/usr/freebsd-dist/dynfi
 # Install pkg, we need to set SRCCONF to /dev/null in case it contain WITHOUT_NLS
