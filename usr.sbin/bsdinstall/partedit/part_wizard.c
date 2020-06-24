@@ -152,7 +152,7 @@ boot_disk_select(struct gmesh *mesh)
 
 	if (n > 1) {
 		err = dlg_menu("Partitioning",
-		    "Select the disk on which to install FreeBSD.", 0, 0, 0,
+		    "Select the disk on which to install DynFi.", 0, 0, 0,
 		    n, disks, &selected, NULL);
 
 		chosen = (err == 0) ? strdup(disks[selected].name) : NULL;
@@ -234,7 +234,7 @@ query:
 		dialog_vars.defaultno = TRUE;
 
 	snprintf(message, sizeof(message), "Would you like to use this entire "
-	    "disk (%s) for FreeBSD or partition it to share it with other "
+	    "disk (%s) for DynFi or partition it to share it with other "
 	    "operating systems? Using the entire disk will erase any data "
 	    "currently stored there.", disk);
 	choice = dialog_yesno("Partition", message, 0, 0);
