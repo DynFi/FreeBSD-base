@@ -82,23 +82,23 @@ pkg_install() {
 }
 
 if [ "${install_base}" == "yes" ]; then
-	pkg_list="FreeBSD-clibs FreeBSD-runtime"
+	pkg_list="DynFi-clibs DynFi-runtime"
 	pkg_install "Mandatory"
-	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-*' | grep -vE "\-kernel|\-lib32|\-debug|\-dev|\-profile" | awk '{print $1}')
+	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-*' | grep -vE "\-kernel|\-lib32|\-debug|\-dev|\-profile" | awk '{print $1}')
 	pkg_install "Base"
 fi
 
 if [ "${install_kernel}" == "yes" ]; then
 	if [ "${install_debug}" == "yes" ]; then
-		pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-kernel-*' | awk '{print $1}')
+		pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-kernel-*' | awk '{print $1}')
 	else
-		pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-kernel-*' | grep -vE "\-debug" | awk '{print $1}')
+		pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-kernel-*' | grep -vE "\-debug" | awk '{print $1}')
 		pkg_install "kernel"
 	fi
 fi
 
 if [ "${install_lib32}" == "yes" ]; then
-	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-*-lib32-*' | grep -vE "\-debug|\-dev|\-profile" | awk '{print $1}')
+	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-*-lib32-*' | grep -vE "\-debug|\-dev|\-profile" | awk '{print $1}')
 	pkg_install "lib32"
 fi
 
@@ -108,7 +108,7 @@ if [ "${install_debug}" == "yes" ]; then
 	else
 		mod="\-lib32|\-dev|\-profile"
 	fi
-	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-*-debug-*' | grep -vE "${mod}" | awk '{print $1}')
+	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-*-debug-*' | grep -vE "${mod}" | awk '{print $1}')
 	pkg_install "debug"
 fi
 
@@ -118,7 +118,7 @@ if [ "${install_development}" == "yes" ]; then
 	else
 		mod="\-lib32|\-debug|\-profile"
 	fi
-	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-*-dev-*' | grep -vE "${mod}" | awk '{print $1}')
+	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-*-dev-*' | grep -vE "${mod}" | awk '{print $1}')
 	pkg_install "dev"
 fi
 
@@ -128,11 +128,11 @@ if [ "${install_profiles}" == "yes" ]; then
 	else
 		mod="\-lib32|\-dev|\-debug"
 	fi
-	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-*-profile-*' | grep -vE "${mod}" | awk '{print $1}')
+	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-*-profile-*' | grep -vE "${mod}" | awk '{print $1}')
 	pkg_install "profile"
 fi
 
-kernel_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'FreeBSD-kernel-*' | grep -vE "\-debug" | awk '{print $1}')
+kernel_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-kernel-*' | grep -vE "\-debug" | awk '{print $1}')
 if [ ! -z "${kernel_list}" ]; then
 	dialogarg=""
 	on=""
