@@ -546,6 +546,9 @@ VERSION=	FreeBSD ${_REVISION}-${_BRANCH:C/-p[0-9]+$//} ${TARGET_ARCH} ${SRCRELDA
 .export VERSION
 .endif
 
+#DynFi: Override _REVISION, TODO calculate this based on the branch/tags
+_REVISION=	0.99.000
+
 .if !defined(PKG_VERSION)
 _STRTIMENOW=	%Y%m%d%H%M%S
 _TIMENOW=	${_STRTIMENOW:gmtime}
@@ -575,6 +578,10 @@ SOURCE_DATE_EPOCH=	${PKG_TIMESTAMP}
 PKG_NAME_PREFIX?=	FreeBSD
 PKG_MAINTAINER?=	re@FreeBSD.org
 PKG_WWW?=		https://www.FreeBSD.org
+# DynFi
+PKG_NAME_PREFIX=	DynFi
+PKG_MAINTAINER=		bugs@dynfi.org
+PKG_WWW=		https://dynfi.com
 .export PKG_NAME_PREFIX
 .export PKG_MAINTAINER
 .export PKG_WWW
