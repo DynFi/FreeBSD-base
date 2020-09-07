@@ -547,7 +547,7 @@ VERSION=	FreeBSD ${_REVISION}-${_BRANCH:C/-p[0-9]+$//} ${TARGET_ARCH} ${SRCRELDA
 MAJOR_REVISION=	${_REVISION:R}
 
 #DynFi: Override _REVISION, TODO calculate this based on the branch/tags
-_REVISION=	0.99.000
+_REVISION=	0.99.001
 
 .if !defined(PKG_VERSION)
 _PKG_REVISION=	${_REVISION}
