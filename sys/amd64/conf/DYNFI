@@ -11,3 +11,4 @@ options		PPS_SYNC
 options		TCP_SIGNATURE
 
 device		netmap
+device		speaker
