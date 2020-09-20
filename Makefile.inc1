@@ -546,9 +546,6 @@ VERSION=	FreeBSD ${_REVISION}-${_BRANCH:C/-p[0-9]+$//} ${TARGET_ARCH} ${SRCRELDA
 .export VERSION
 .endif
 
-#DynFi: Override _REVISION, TODO calculate this based on the branch/tags
-_REVISION=	0.99.001
-
 .if !defined(PKG_VERSION)
 _STRTIMENOW=	%Y%m%d%H%M%S
 _TIMENOW=	${_STRTIMENOW:gmtime}
@@ -567,6 +564,10 @@ EXTRA_REVISION=	p${_BRANCH:C/.*-p([0-9]+$)/\1/}
 PKG_VERSION:=	${_REVISION}${EXTRA_REVISION:C/[[:space:]]//g}
 .endif
 .endif	# !defined(PKG_VERSION)
+
+#DynFi: Override _REVISION, TODO calculate this based on the branch/tags
+_REVISION=	0.99.001
+EXTRA_REVISION=-BETA
 
 .if !defined(PKG_TIMESTAMP)
 TIMEEPOCHNOW=		%s
