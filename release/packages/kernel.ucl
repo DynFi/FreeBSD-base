@@ -1,9 +1,9 @@
 scripts: {
 	pre-deinstall = <<EOD
-	/usr/sbin/kernel-select -k ${PKG_ROOTDIR}/boot/ -p backup FreeBSD-%PKGNAME%
+	/usr/sbin/kernel-select -k ${PKG_ROOTDIR}/boot/ -p backup %PKG_NAME_PREFIX%-%PKGNAME%
 EOD
 	post-install = <<EOD
-	/usr/sbin/kernel-select -k ${PKG_ROOTDIR}/boot/ -p switch FreeBSD-%PKGNAME%
+	/usr/sbin/kernel-select -k ${PKG_ROOTDIR}/boot/ -p switch %PKG_NAME_PREFIX%-%PKGNAME%
 EOD
 	post-deinstall = <<EOD
 	/usr/sbin/kernel-select cleanup
