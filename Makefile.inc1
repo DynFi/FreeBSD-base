@@ -567,7 +567,7 @@ PKG_VERSION:=	${_REVISION}${EXTRA_REVISION:C/[[:space:]]//g}
 
 #DynFi: Override _REVISION, TODO calculate this based on the branch/tags
 _REVISION=	0.99.001
-EXTRA_REVISION=-BETA
+EXTRA_REVISION=""
 
 .if !defined(PKG_TIMESTAMP)
 TIMEEPOCHNOW=		%s
