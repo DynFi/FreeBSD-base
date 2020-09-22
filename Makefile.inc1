@@ -568,13 +568,13 @@ EXTRA_REVISION=	.${BRANCH_EXT}.${_TIMENOW}
 BRANCH_EXT=	p${_BRANCH:C/.*-p([0-9]+$)/\1/}
 EXTRA_REVISION=	${BRANCH_EXT}
 .endif
-PKG_VERSION:=	${_PKG_REVISION}${EXTRA_REVISION:C/[[:space:]]//g}
-.endif
-.endif	# !defined(PKG_VERSION)
 
 #DynFi: Override _REVISION, TODO calculate this based on the branch/tags
 _REVISION=	0.99.001
 EXTRA_REVISION=""
+PKG_VERSION:=	${_REVISION}${EXTRA_REVISION}
+.endif
+.endif	# !defined(PKG_VERSION)
 
 .if !defined(PKG_TIMESTAMP)
 TIMEEPOCHNOW=		%s
