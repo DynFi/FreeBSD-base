@@ -21,6 +21,7 @@ SUBDIR=	adduser \
 	devinfo \
 	diskinfo \
 	dumpcis \
+	dynfi-update \
 	etcupdate \
 	extattr \
 	extattrctl \
