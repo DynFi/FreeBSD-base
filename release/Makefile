@@ -261,7 +261,7 @@ disc1: packagesystem
 .else
 	cp ${.CURDIR}/config_vga.xml ${.TARGET}/conf/config.xml
 .endif
-	rm ${.TARGET}/etc/pkg/FreeBSD.conf
+	rm -f ${.TARGET}/etc/pkg/FreeBSD.conf
 	# DynFi
 	echo 'kernel="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'module_path="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf
