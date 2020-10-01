@@ -263,6 +263,7 @@ disc1: packagesystem
 .endif
 	rm -f ${.TARGET}/etc/pkg/FreeBSD.conf
 	# DynFi
+	rm -f ${.TARGET}/etc/pkg/Dynfi-base.conf
 	echo 'kernel="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf.local
 	echo 'module_path="kernel.GENERIC"' >> ${.TARGET}/boot/loader.conf
 	echo 'boot_multicons="YES"' >> ${.TARGET}/boot/loader.conf.local
