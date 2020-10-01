@@ -569,8 +569,7 @@ BRANCH_EXT=	p${_BRANCH:C/.*-p([0-9]+$)/\1/}
 EXTRA_REVISION=	${BRANCH_EXT}
 .endif
 
-#DynFi: Override _REVISION, TODO calculate this based on the branch/tags
-_REVISION=	0.99.001
+#DynFi: Override EXTRA_REVISION
 EXTRA_REVISION=""
 PKG_VERSION:=	${_REVISION}${EXTRA_REVISION}
 .endif
