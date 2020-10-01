@@ -59,7 +59,7 @@ DISTDIR=	dist
 
 # Define OSRELEASE by using newvers.sh
 .if !defined(OSRELEASE) || empty(OSRELEASE)
-.for _V in TYPE BRANCH REVISION
+.for _V in TYPE BRANCH REVISION DYNFI_VERSION
 ${_V}!=	eval $$(awk '/^${_V}=/{print}' ${.CURDIR}/../sys/conf/newvers.sh); echo $$${_V}
 .endfor
 .for _V in ${TARGET_ARCH}
