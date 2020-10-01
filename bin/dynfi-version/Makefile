@@ -12,6 +12,7 @@ dynfi-version.sh: ${.CURDIR}/dynfi-version.sh.in
 			s/@@TYPE@@/$${TYPE}/g; \
 			s/@@REVISION@@/$${REVISION}/g; \
 			s/@@BRANCH@@/$${BRANCH}/g; \
+			s/@@DYNFI_VERSION@@/$${DYNFI_VERSION}/g; \
 		" ${.CURDIR}/dynfi-version.sh.in >${.TARGET} ; then \
 		rm -f ${.TARGET} ; \
 		exit 1 ; \
