@@ -12,6 +12,7 @@ SUBDIR= cat \
 	dd \
 	df \
 	domainname \
+	dynfi-version \
 	echo \
 	ed \
 	expr \

@@ -60,6 +60,7 @@ if [ -n "${BRANCH_OVERRIDE}" ]; then
 fi
 RELEASE="${REVISION}-${BRANCH}"
 VERSION="${TYPE} ${RELEASE}"
+DYNFI_VERSION="0.99.001"
 
 if [ -z "${SYSDIR}" ]; then
     SYSDIR=$(dirname $0)/..
@@ -117,7 +118,7 @@ while getopts crRvV: opt; do
 		;;
 	v)
 		# Only put variables that are single lines here.
-		for v in TYPE REVISION BRANCH RELEASE VERSION RELDATE; do
+		for v in TYPE REVISION BRANCH RELEASE VERSION RELDATE DYNFI_VERSION; do
 			eval val=\$${v}
 			echo ${v}=\"${val}\"
 		done
