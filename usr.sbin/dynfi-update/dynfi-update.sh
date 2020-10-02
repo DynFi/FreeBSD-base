@@ -37,16 +37,16 @@ update_activate_on_reboot()
 
 update_deactivate_on_reboot()
 {
-	rm /.dynfi.upgrade
+	rm -f /.dynfi.upgrade
 }
 
 update_check()
 {
 	echo "Checking for available updates"
 	pkg update >/dev/null 2>&1 || err "Cannot update repositories"
-	pkg upgrade -r ${DYNFI_BASE_REPO} -n >/dev/null 2>&1
+	pkg upgrade -y -r ${DYNFI_BASE_REPO} -n >/dev/null 2>&1
 	base_update=$?
-	pkg upgrade -r ${DYNFI_PORTS_REPO} -n >/dev/null 2>&1
+	pkg upgrade -y -r ${DYNFI_PORTS_REPO} -n >/dev/null 2>&1
 	if [ $? -eq 0 ] && [ "${base_update}" -eq 0 ]; then
 		err "No update to install"
 	fi
@@ -57,8 +57,8 @@ update_fetch()
 {
 	update_check
 	echo "Downloading packages"
-	pkg -o ASSUME_ALWAYS_YES=true upgrade -r ${DYNFI_BASE_REPO} -F >/dev/null 2>&1 || err "Failed to download the packages"
-	pkg -o ASSUME_ALWAYS_YES=true upgrade -r ${DYNFI_PORTS_REPO} -F >/dev/null 2>&1 || err "Failed to download the packages"
+	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_BASE_REPO} -F >/dev/null 2>&1 || err "Failed to download the packages"
+	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_PORTS_REPO} -F >/dev/null 2>&1 || err "Failed to download the packages"
 }
 
 update_install()
@@ -75,14 +75,16 @@ update_install()
 		if [ "${kernel_need_update}" -ne 0 ]; then
 			echo "Upgrading the kernel"
 			pkg upgrade -Uqy "${running_kernel_package}"
+			update_activate_on_reboot
 			echo "Done"
 			echo "Please reboot to finish the upgrade"
+			exit 0
 		fi
-		update_activate_on_reboot
+		echo "No updates to install"
 		exit 0
 	fi
 
-	pkg -o ASSUME_ALWAYS_YES=true upgrade -r ${DYNFI_BASE_REPO} -U
+	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_BASE_REPO} -U
 	update_deactivate_on_reboot
 	echo "Upgrade finished, rebooting now"
 	sleep 3
