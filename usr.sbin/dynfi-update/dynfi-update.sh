@@ -43,10 +43,10 @@ update_deactivate_on_reboot()
 update_check()
 {
 	echo "Checking for available updates"
-	pkg update >/dev/null 2>&1 || err "Cannot update repositories"
-	pkg upgrade -y -r ${DYNFI_BASE_REPO} -n >/dev/null 2>&1
+	pkg -o ASSUME_ALWAYS_YES=yes update >/dev/null 2>&1 || err "Cannot update repositories"
+	pkg -o ASSUME_ALWAYS_YES=yes upgrade -y -r ${DYNFI_BASE_REPO} -n >/dev/null 2>&1
 	base_update=$?
-	pkg upgrade -y -r ${DYNFI_PORTS_REPO} -n >/dev/null 2>&1
+	pkg -o ASSUME_ALWAYS_YES=yes upgrade -y -r ${DYNFI_PORTS_REPO} -n >/dev/null 2>&1
 	if [ $? -eq 0 ] && [ "${base_update}" -eq 0 ]; then
 		err "No update to install"
 	fi
@@ -74,7 +74,7 @@ update_install()
 		kernel_need_update=$(pkg version -Uqn "${running_kernel_package}" -l '<' | wc -l)
 		if [ "${kernel_need_update}" -ne 0 ]; then
 			echo "Upgrading the kernel"
-			pkg upgrade -Uqy "${running_kernel_package}"
+			pkg -o ASSUME_ALWAYS_YES=yes upgrade -Uqy "${running_kernel_package}"
 			update_activate_on_reboot
 			echo "Done"
 			echo "Please reboot to finish the upgrade"
