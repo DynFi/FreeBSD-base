@@ -93,6 +93,7 @@ update_install()
 	fi
 
 	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_BASE_REPO} -U
+	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_PORTS_REPO} -U
 	update_deactivate_on_reboot
 	echo "Upgrade finished, rebooting now"
 	sleep 3
