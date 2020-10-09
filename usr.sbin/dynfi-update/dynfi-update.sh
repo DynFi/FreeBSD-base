@@ -77,6 +77,14 @@ update_install()
 			pkg -o ASSUME_ALWAYS_YES=yes upgrade -Uqy "${running_kernel_package}"
 			update_activate_on_reboot
 			echo "Done"
+			if [ "${INTERACTIVE}" -eq 1 ]; then
+				echo "Update will install at the next reboot"
+				echo "Would you like to reboot now (Yy/Nn) ?"
+				read answer
+				if [ "${answer}" = "Y" ] || [ "${answer}" = "y" ]; then
+					reboot
+				fi
+			fi
 			echo "Please reboot to finish the upgrade"
 			exit 0
 		fi
@@ -111,7 +119,7 @@ done
 
 if [ -z "${COMMANDS}" ] ; then
 	if [ "${INTERACTIVE}" -eq 1 ]; then
-		COMMANDS="check fetch"
+		COMMANDS="check fetch install"
 	else
 		usage
 	fi
@@ -120,12 +128,3 @@ fi
 for command in ${COMMANDS}; do
 	update_${command}
 done
-
-if [ -f /.dynfi.upgrade ] && [ "${INTERACTIVE}" -eq 1 ]; then
-	echo "Update will install at the next reboot"
-	echo "Would you like to reboot now (Yy/Nn) ?"
-	read answer
-	if [ "${answer}" = "Y" ] || [ "${answer}" = "y" ]; then
-		reboot
-	fi
-fi
