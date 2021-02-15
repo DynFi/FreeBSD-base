@@ -28,7 +28,7 @@
 
 # Install pkg into the new root
 pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install pkg
-pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install php72-opnsense-core python3
+pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install php73-opnsense-core python3
 
 # TODO add this to the mtree files
 mkdir -p ${BSDINSTALL_CHROOT}/conf
