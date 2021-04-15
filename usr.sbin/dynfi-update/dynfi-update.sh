@@ -86,12 +86,12 @@ update_install()
 				fi
 			fi
 			echo "Please reboot to finish the upgrade"
-			exit 0
+		else
+			pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_BASE_REPO} -U
+			pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_PORTS_REPO} -U
 		fi
-		echo "No updates to install"
 		exit 0
 	fi
-
 	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_BASE_REPO} -U
 	pkg -o ASSUME_ALWAYS_YES=true upgrade -y -r ${DYNFI_PORTS_REPO} -U
 	update_deactivate_on_reboot
