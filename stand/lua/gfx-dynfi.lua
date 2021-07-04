@@ -1,7 +1,7 @@
 --
 -- SPDX-License-Identifier: BSD-2-Clause-FreeBSD
 --
--- Copyright (c) 2019 Gregory Bernard <gregory.bernard@dynfi.com>
+-- Copyright (c) 2021 Mariusz Zaborski <oshogbo@vexillium.org>
 --
 -- Redistribution and use in source and binary forms, with or without
 -- modification, are permitted provided that the following conditions
@@ -27,27 +27,16 @@
 -- $FreeBSD$
 --
 
-local drawer = require("drawer")
-
-local dynfi_logo = {
-"    ____                 ______ _              ",
-"   / __ \\ __  __ ____   / ____/(_)             ",
-"  / / / // / / // __ \\ / /_   / /              ",
-" / /_/ // /_/ // / / // __/  / /               ",
-"/_____/ \\__, //_/ /_//_/    /_/                ",
-"       /____/                                  ",
-"    ______ _                              __ __",
-"   / ____/(_)_____ ___  _      __ ____ _ / // /",
-"  / /_   / // ___// _ \\| | /| / // __ `// // / ",
-" / __/  / // /   /  __/| |/ |/ // /_/ // // /  ",
-"/_/    /_//_/    \\___/ |__/|__/ \\__,_//_//_/   ",
-"                                               ",
-"                                               "
+return {
+	brand = {
+		graphic = {
+			" ___            ___ _ ",
+			"|   \\ _  _ _ _ | __(_)",
+			"| |) | || | ' \\| _|| |",
+			"|___/ \\_, |_||_|_| |_|                 _ _",
+			"      |__/  | __(_)_ _ _____ __ ____ _| | |",
+			"            | _|| | '_/ -_) V  V / _` | | |",
+			"            |_| |_|_| \\___|\\_/\\_/\\__,_|_|_|",
+		},
+	}
 }
-
-drawer.addLogo("dynfibw", {
-	graphic = dynfi_logo,
-	shift = {x = 5, y = 4},
-})
-
-return true
