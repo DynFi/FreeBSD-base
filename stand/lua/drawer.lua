@@ -261,7 +261,7 @@ local function drawbox()
 	local y = menu_position.y - 1
 	local w = frame_size.w
 	local menu_header = loader.getenv("loader_menu_title") or
-	    "Welcome to FreeBSD"
+	    "Welcome to DynFi Firewall"
 	local menu_header_align = loader.getenv("loader_menu_title_align")
 	local menu_header_x
 
@@ -466,9 +466,9 @@ default_shift = {x = 0, y = 0}
 shift = default_shift
 
 -- Module exports
-drawer.default_brand = 'fbsd'
-drawer.default_color_logodef = 'dynfi'
-drawer.default_bw_logodef = 'dynfibw'
+drawer.default_brand = 'dynfi'
+drawer.default_color_logodef = 'octopus'
+drawer.default_bw_logodef = 'octopus'
 -- For when things go terribly wrong; this def should be present here in the
 -- drawer module in case it's a filesystem issue.
 drawer.default_fallback_logodef = 'none'
