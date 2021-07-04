@@ -24,12 +24,11 @@ FILES=	cli.lua \
 	loader.lua \
 	gfx-beastie.lua \
 	gfx-beastiebw.lua \
+	gfx-dynfi.lua \
 	gfx-fbsdbw.lua \
+	gfx-octopus.lua \
 	gfx-orb.lua \
 	gfx-orbbw.lua \
-	logo-dynfi.lua \
-	logo-dynfibw.lua \
-	logo-octopus.lua \
 	menu.lua \
 	password.lua \
 	screen.lua
