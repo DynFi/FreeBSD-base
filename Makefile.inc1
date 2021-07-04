@@ -563,7 +563,7 @@ EXTRA_REVISION=	.rc${_BRANCH:C/RC([0-9]+).*/\1/}.${_TIMENOW}
 EXTRA_REVISION=	p${_BRANCH:C/.*-p([0-9]+$)/\1/}
 .endif
 #DynFi: Override EXTRA_REVISION
-EXTRA_REVISION=""
+EXTRA_REVISION=
 PKG_VERSION:=	${_REVISION}${EXTRA_REVISION}
 .endif
 .endif	# !defined(PKG_VERSION)
