@@ -29,6 +29,7 @@
 # Install pkg into the new root
 pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install pkg
 pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install php73-opnsense-core python3 beep
+pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install aquantia-atlantic-kmod
 
 # TODO add this to the mtree files
 mkdir -p ${BSDINSTALL_CHROOT}/conf
