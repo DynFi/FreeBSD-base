@@ -42,10 +42,10 @@ hline_arrows_tab_enter="Press arrows, TAB or ENTER"
 hline_arrows_tab_space_enter="Press arrows, TAB, SPACE or ENTER"
 msg_abort="Abort"
 msg_an_installation_step_has_been_aborted="An installation step has been aborted. Would you like\nto restart the installation or exit the installer?"
-msg_auto_ufs="Auto (UFS)"
+msg_auto_ufs="UFS"
 msg_auto_ufs_desc="Guided UFS Disk Setup"
 msg_auto_ufs_help="Menu options help choose which disk to setup using UFS and standard partitions"
-msg_auto_zfs="Auto (ZFS)"
+msg_auto_zfs="ZFS"
 msg_auto_zfs_desc="Guided Root-on-ZFS"
 msg_auto_zfs_help="To use ZFS with less than 8GB RAM, see https://wiki.freebsd.org/ZFSTuningGuide"
 msg_exit="Exit"
@@ -299,9 +299,10 @@ fi
 
 PMODES="
 	'$msg_auto_ufs' '$msg_auto_ufs_desc' '$msg_auto_ufs_help'
-	'$msg_manual' '$msg_manual_desc' '$msg_manual_help'
-	'$msg_shell' '$msg_shell_desc' '$msg_shell_help'
-" # END-QUOTE
+"
+#	'$msg_manual' '$msg_manual_desc' '$msg_manual_help'
+#	'$msg_shell' '$msg_shell_desc' '$msg_shell_help'
+#" # END-QUOTE
 
 CURARCH=$( uname -m )
 case $CURARCH in
@@ -312,27 +313,32 @@ case $CURARCH in
 		" # END-QUOTE
 		;;
 	*)			# Booting ZFS Unsupported
+		PARTMODE="$msg_auto_ufs"
 		;;
 esac
 
-# Dynfi: Force UFS for now
-#exec 3>&1
-#PARTMODE=`echo $PMODES | xargs dialog --backtitle "DynFi Installer" \
-#	--title "Partitioning" \
-#	--item-help \
-#	--menu "How would you like to partition your disk?" \
-#	0 0 0 2>&1 1>&3` || exit 1
-#exec 3>&-
+if [ -z "${PARTMODE}" ]; then
+	exec 3>&1
+	PARTMODE=`echo $PMODES | xargs dialog --backtitle "DynFi Installer" \
+		--title "Partitioning" \
+		--item-help \
+		--menu "How would you like to partition your disk?" \
+		0 0 0 2>&1 1>&3` || exit 1
+	exec 3>&-
+fi
 
-#case "$PARTMODE" in
-#"$msg_auto_zfs")	# ZFS
-#	bsdinstall zfsboot || error "ZFS setup failed"
-#	bsdinstall mount || error "Failed to mount filesystem"
-#	;;
-#"$msg_auto_ufs")	# Guided UFS
-#	bsdinstall autopart || error "Partitioning error"
-#	bsdinstall mount || error "Failed to mount filesystem"
-#	;;
+echo "${PARTMODE}"
+
+case "$PARTMODE" in
+"$msg_auto_zfs")	# ZFS
+	bsdinstall zfsboot || error "ZFS setup failed"
+	bsdinstall mount || error "Failed to mount filesystem"
+	;;
+"$msg_auto_ufs")	# Guided UFS
+	echo "HELLO"
+	bsdinstall autopart || error "Partitioning error"
+	bsdinstall mount || error "Failed to mount filesystem"
+	;;
 #"$msg_shell")		# Shell
 #	clear
 #	echo "Use this shell to set up partitions for the new system. When finished, mount the system at $BSDINSTALL_CHROOT and place an fstab file for the new system at $PATH_FSTAB. Then type 'exit'. You can also enter the partition editor at any time by entering 'bsdinstall partedit'."
@@ -347,13 +353,10 @@ esac
 #	fi
 #	bsdinstall mount || error "Failed to mount filesystem"
 #	;;
-#*)
-#	error "Unknown partitioning mode"
-#	;;
-#esac
-# Force UFS
-bsdinstall autopart || error "Partitioning error"
-bsdinstall mount || error "Failed to mount filesystem"
+*)
+	error "Unknown partitioning mode"
+	;;
+esac
 
 if [ ${PKGBASE_INSTALL} -eq 0 && ! -z "$FETCH_DISTRIBUTIONS" ]; then
 	ALL_DISTRIBUTIONS="$DISTRIBUTIONS"
