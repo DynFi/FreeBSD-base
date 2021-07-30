@@ -208,6 +208,16 @@
             uk_UA.KOI8-U
             ..
         ..
+        DynFi
+            keys
+                pkg
+                    revoked tags=package=runtime
+                    ..
+                    trusted tags=package=runtime
+                    ..
+                ..
+            ..
+        ..
         certs
             blacklisted tags=package=caroot
             ..
