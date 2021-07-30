@@ -7,6 +7,7 @@
 
 SUBDIR=	${_colldef} \
 	${_ctypedef} \
+	DynFi \
 	${_dict} \
 	${_doc} \
 	${_dtrace} \
