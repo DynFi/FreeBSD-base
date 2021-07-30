@@ -205,6 +205,16 @@
         ..
         calendar
         ..
+        DynFi
+            keys
+                pkg
+                    revoked tags=package=runtime
+                    ..
+                    trusted tags=package=runtime
+                    ..
+                ..
+            ..
+        ..
         certs
             trusted tags=package=caroot
             ..
