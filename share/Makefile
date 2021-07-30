@@ -5,7 +5,8 @@
 # Do not include `info' in the SUBDIR list, it is handled separately.
 
 SUBDIR=	${_colldef} \
-	ctypedef \
+	${_ctypedef} \
+	DynFi \
 	${_dict} \
 	${_doc} \
 	${_dtrace} \
