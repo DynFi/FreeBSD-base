@@ -202,7 +202,10 @@ disc1: packagesystem
 	rm ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/*-dev*
 	pkg repo ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/
 	# Dynfi: Copy the result of poudriere bulk
-	cp -RH ${DYNFI_REPODIR} ${.TARGET}/usr/freebsd-dist/dynfi
+	mkdir -p ${.TARGET}/usr/freebsd-dist/dynfi/All
+	echo "${DYNFI_PORTS_LIST}" | xargs -I@ sh -c "cp -RH ${DYNFI_REPODIR}/@ ${.TARGET}/usr/freebsd-dist/dynfi/All"
+	cp -RH "${DYNFI_REPODIR}/Latest" "${.TARGET}/usr/freebsd-dist/dynfi/"
+	pkg repo ${.TARGET}/usr/freebsd-dist/dynfi/
 # Install pkg, we need to set SRCCONF to /dev/null in case it contain WITHOUT_NLS
 # the ports tree doesn't like that
 # HACK: lately pkg fails to compile in weird way, do a hack version of extracting in
