@@ -304,6 +304,7 @@
     <rocommunity>public</rocommunity>
   </snmpd>
   <syslog>
+    <disable_clog>1</disable_clog>
     <reverse/>
   </syslog>
   <nat>
