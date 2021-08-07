@@ -174,7 +174,8 @@ fi
 
 touch version
 v=$(cat version)
-u=${USER:-root}
+#u=${USER:-root}
+u="builder"
 d=$(pwd)
 h=${HOSTNAME:-$(hostname)}
 if [ -n "$SOURCE_DATE_EPOCH" ]; then
