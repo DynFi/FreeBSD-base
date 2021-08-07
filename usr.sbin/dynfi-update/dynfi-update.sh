@@ -118,6 +118,14 @@ while [ $# -ne 0 ]; do
 	esac
 done
 
+if [ "${INTERACTIVE}" -eq 1 ]; then
+	echo "Would you like to upgrade now (Yy/Nn) ?"
+	read answer
+	if [ "${answer}" != "Y" ] && [ "${answer}" != "y" ]; then
+		return 0
+	fi
+fi
+
 if [ -z "${COMMANDS}" ] ; then
 	if [ "${INTERACTIVE}" -eq 1 ]; then
 		COMMANDS="check fetch install"
