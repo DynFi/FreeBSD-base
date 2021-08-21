@@ -230,7 +230,7 @@
     <timezone>Etc/UTC</timezone>
     <timeservers>0.europe.pool.ntp.org 1.europe.pool.ntp.org 2.europe.pool.ntp.org 3.europe.pool.ntp.org</timeservers>
     <webgui>
-      <protocol>http</protocol>
+      <protocol>https</protocol>
     </webgui>
     <disablenatreflection>yes</disablenatreflection>
     <usevirtualterminal>1</usevirtualterminal>
