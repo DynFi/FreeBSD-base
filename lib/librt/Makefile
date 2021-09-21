@@ -2,7 +2,7 @@ SHLIBDIR?=/lib
 
 .include <src.opts.mk>
 
-PACKAGE=clibs
+#PACKAGE=clibs
 LIB=rt
 SHLIB_MAJOR= 1
 CFLAGS+=-I${SRCTOP}/lib/libc/include -I${.CURDIR}
