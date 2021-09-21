@@ -5,7 +5,7 @@
 LIB=		ssl
 SHLIB_MAJOR=	111
 VERSION_MAP=	${.CURDIR}/Version.map
-PACKAGE=	openssl
+#PACKAGE=	openssl
 
 NO_LINT=
 

@@ -137,6 +137,6 @@ MLINKS+=	bsnmplib.3	snmp_value_parse.3
 FILESGROUPS+=	DEFS
 DEFS=	tc.def
 DEFSDIR?=	${SHAREDIR}/snmp/defs
-DEFSPACKAGE=	bsnmp
+#DEFSPACKAGE=	bsnmp
 
 .include <bsd.lib.mk>

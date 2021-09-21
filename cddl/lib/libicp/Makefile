@@ -2,7 +2,8 @@
 
 .PATH: ${SRCTOP}/sys/contrib/openzfs/module/icp
 
-PACKAGE=	utilities
+#PACKAGE=	utilities
+PACKAGE=	runtime
 LIB=	icp
 LIBADD=
 
