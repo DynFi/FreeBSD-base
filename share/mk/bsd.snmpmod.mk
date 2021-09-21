@@ -32,8 +32,8 @@ FILESGROUPS+=	BMIBS
 BMIBSDIR?=	${SHAREDIR}/snmp/mibs
 .endif
 
-DEFSPACKAGE=	bsnmp
-BMIBSPACKAGE=	bsnmp
+#DEFSPACKAGE=	bsnmp
+#BMIBSPACKAGE=	bsnmp
 
 .if !target(smilint) && !empty(BMIBS)
 LOCALBASE?=	/usr/local
