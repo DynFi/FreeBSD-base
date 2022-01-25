@@ -1,5 +1,5 @@
 # $FreeBSD$
 
-SUBDIR= pkg 
+SUBDIR= pkg
 
 .include <bsd.subdir.mk>
