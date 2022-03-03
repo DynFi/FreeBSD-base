@@ -18,14 +18,13 @@ PKGCONFBRANCH?=	latest
 . endif
 .endif
 
-PKGCONF?=	FreeBSD.conf.${PKGCONFBRANCH}
-CONFS=		${PKGCONF}
-CONFSNAME_${PKGCONF}=	${PKGCONF:C/\.conf.+$/.conf/}
+#PKGCONF?=	FreeBSD.conf.${PKGCONFBRANCH}
+#CONFS=		${PKGCONF}
+#CONFSNAME_${PKGCONF}=	${PKGCONF:C/\.conf.+$/.conf/}
 
 # DynFi
-PKGCONF=	DynFi-base.conf
-CONFS=		DynFi-base.conf
-CONFSNAME_${PKGCONF}=	DynFi-base.conf
+PKGCONF=	DynFi-base.conf.sample
+CONFS=		${PKGCONF} DynFi-base.conf.devel
 
 CONFSDIR=	/etc/pkg
 CONFSMODE=	644
