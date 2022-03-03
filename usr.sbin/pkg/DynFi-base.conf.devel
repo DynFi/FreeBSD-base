@@ -1,0 +1,6 @@
+DynFi-base: {
+  url: "http://packages.dynfi.com/base-dev/${ABI}/latest",
+  enabled: yes,
+  signature_type: "fingerprints",
+  fingerprints: "/usr/share/DynFi/keys/pkg",
+}
