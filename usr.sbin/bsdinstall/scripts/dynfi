@@ -45,3 +45,10 @@ echo 'boot_multicons="YES"' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
 echo 'boot_serial="YES"' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
 echo 'comconsole_speed=115200' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
 echo 'console=comconsole' >> ${BSDINSTALL_CHROOT}/boot/loader.conf.local
+
+# TODO: For some reason ntop post install is not run properly
+pw -R ${BSDINSTALL_CHROOT} groupadd ntopng 
+pw -R ${BSDINSTALL_CHROOT} useradd ntopng -s /sbin/nologin -d /nonexistent -c "ntopng user" -w no -g ntopng
+chroot ${BSDINSTALL_CHROOT} chown ntopng:ntopng /usr/local/bin/ntopng-config
+chroot ${BSDINSTALL_CHROOT} chmod ugo+s /usr/local/bin/ntopng-config
+chroot ${BSDINSTALL_CHROOT} chown -R ntopng:ntopng /usr/local/etc/ntopng
