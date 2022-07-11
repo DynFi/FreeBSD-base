@@ -38,7 +38,7 @@ pkg_install() {
 }
 
 # Install pkg into the new root
-pkg_list="pkg python3 `pkg -r ${BSDINSTALL_CHROOT} search -Q depends-on dynfi/DynFi | tail -n +4 | xargs` DynFi"
+pkg_list="pkg `pkg -r ${BSDINSTALL_CHROOT} search -Q depends-on dynfi/DynFi | tail -n +4 | xargs` DynFi"
 pkg_install "DynFi"
 
 # TODO add this to the mtree files
