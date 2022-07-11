@@ -26,10 +26,20 @@
 # $FreeBSD$
 #
 
+pkg_install() {
+	n=0
+	total=$(echo ${pkg_list} | wc -w)
+	for item in ${pkg_list}; do
+		percentage=$((100 * n/total))
+		dialog --backtitle "DynFi Installer" --title "Installing $1 packages" --mixedgauge "Installing ${item}"  0 0 $percentage
+		pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install ${item} >/dev/null 2>&1
+		n=$((n + 1))
+	done
+}
+
 # Install pkg into the new root
-pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install pkg
-pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install python3
-pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install dynfi
+pkg_list="pkg python3 `pkg -r ${BSDINSTALL_CHROOT} search -Q depends-on dynfi/DynFi | tail -n +4 | xargs` DynFi"
+pkg_install "DynFi"
 
 # TODO add this to the mtree files
 mkdir -p ${BSDINSTALL_CHROOT}/conf
