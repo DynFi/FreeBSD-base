@@ -84,7 +84,7 @@ pkg_install() {
 if [ "${install_base}" == "yes" ]; then
 	pkg_list="DynFi-clibs DynFi-runtime"
 	pkg_install "Mandatory"
-	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-*' | grep -vE "\-kernel|\-lib32|\-debug|\-dev|\-profile" | awk '{print $1}')
+	pkg_list=$(pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} search -g 'DynFi-[a-zA-Z]*' | grep -vE "\-kernel|\-lib32|\-debug|\-dev|\-profile" | awk '{print $1}')
 	pkg_install "Base"
 fi
 
