@@ -43,7 +43,8 @@ main() {
 			# else imposed on it.
 			;;
 		caroot)
-			pkgdeps="openssl"
+			#pkgdeps="openssl"
+			pkgdeps="utilities"
 			;;
 		utilities)
 			uclfile="${uclfile}"
