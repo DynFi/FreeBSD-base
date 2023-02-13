@@ -3,11 +3,11 @@
 # Warning flags for compiling the kernel and components of the kernel:
 #
 CWARNFLAGS?=	-Wall -Wstrict-prototypes \
-		-Wmissing-prototypes -Wpointer-arith -Wcast-qual \
-		-Wundef -Wno-pointer-sign ${FORMAT_EXTENSIONS} \
-		-Wmissing-include-dirs -fdiagnostics-show-option \
-		-Wno-unknown-pragmas \
-		${CWARNEXTRA}
+	-Wmissing-prototypes -Wpointer-arith -Wcast-qual \
+	-Wundef -Wno-pointer-sign ${FORMAT_EXTENSIONS} \
+	-Wmissing-include-dirs -fdiagnostics-show-option \
+	-Wno-unknown-pragmas \
+	${CWARNEXTRA}
 #
 # The following flags are next up for working on:
 #	-Wextra
@@ -41,8 +41,8 @@ NO_WDEPRECATED_NON_PROTOTYPE=	-Wno-deprecated-non-prototype
 # enough to error out the whole kernel build.  Display them anyway, so there is
 # some incentive to fix them eventually.
 CWARNEXTRA?=	-Wno-error=tautological-compare -Wno-error=empty-body \
-		-Wno-error=parentheses-equality -Wno-error=unused-function \
-		-Wno-error=pointer-sign
+	-Wno-error=parentheses-equality -Wno-error=unused-function \
+	-Wno-error=pointer-sign
 CWARNEXTRA+=	-Wno-error=shift-negative-value
 CWARNEXTRA+=	-Wno-address-of-packed-member
 .endif	# clang
