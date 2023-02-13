@@ -23,3 +23,5 @@ CWARNFLAGS.deflate.c+=-Wno-cast-qual # deflate.c:415
 CWARNFLAGS.uncompr.c+=-Wno-cast-qual # uncompr:49
 
 .include <bsd.kmod.mk>
+
+CWARNFLAGS+=${NO_WDEPRECATED_NON_PROTOTYPE} # https://github.com/madler/zlib/issues/633
