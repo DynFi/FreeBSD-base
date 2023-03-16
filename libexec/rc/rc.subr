@@ -1326,10 +1326,10 @@ $_cpusetcmd $command $rc_flags $command_args"
 				[ -z "${rc_pid}" ] && eval $_pidcmd
 				case $_oomprotect in
 				[Aa][Ll][Ll])
-					${PROTECT} -d -i -p ${rc_pid}
+					echo "${rc_pid}" | tr " " "\n" | xargs -L1 ${PROTECT} -d -i -p
 					;;
 				[Yy][Ee][Ss])
-					${PROTECT} -p ${rc_pid}
+					echo "${rc_pid}" | tr " " "\n" | xargs -L1 ${PROTECT} -p
 					;;
 				esac
 			fi
