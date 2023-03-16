@@ -62,3 +62,8 @@ pw -R ${BSDINSTALL_CHROOT} useradd ntopng -s /sbin/nologin -d /nonexistent -c "n
 chroot ${BSDINSTALL_CHROOT} chown ntopng:ntopng /usr/local/bin/ntopng-config
 chroot ${BSDINSTALL_CHROOT} chmod ugo+s /usr/local/bin/ntopng-config
 chroot ${BSDINSTALL_CHROOT} chown -R ntopng:ntopng /usr/local/etc/ntopng
+
+OLD_LIBLDAB=`ldd ${BSDINSTALL_CHROOT}/usr/local/bin/ntopng | grep libldap | sed 's/ =>.*//' | tr -d '\t'`
+chroot ${BSDINSTALL_CHROOT} ln -s /usr/local/lib/libldap.so /usr/local/lib/${OLD_LIBLDAB}
+OLD_LIBLBER=`ldd ${BSDINSTALL_CHROOT}/usr/local/bin/ntopng | grep liblber | sed 's/ =>.*//' | tr -d '\t'`
+chroot ${BSDINSTALL_CHROOT} ln -s /usr/local/lib/liblber.so /usr/local/lib/${OLD_LIBLBER}
