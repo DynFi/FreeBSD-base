@@ -54,6 +54,7 @@ CWARNEXTRA+=	-Wno-error=deprecated-non-prototype
 CWARNEXTRA+=	-Wno-error=strict-prototypes
 CWARNEXTRA+=	-Wno-error=unused-but-set-variable
 .endif
+.endif
 .endif	# clang
 
 .if ${COMPILER_TYPE} == "gcc"
