@@ -1283,10 +1283,10 @@ $command $rc_flags $command_args"
 				pid=$(check_process $command)
 				case $_oomprotect in
 				[Aa][Ll][Ll])
-					${PROTECT} -i -p ${pid}
+					echo "${pid}" | tr " " "\n" | xargs -L1 ${PROTECT} -i -p
 					;;
 				[Yy][Ee][Ss])
-					${PROTECT} -p ${pid}
+					echo "${pid}" | tr " " "\n" | xargs -L1 ${PROTECT} -p
 					;;
 				esac
 			fi
