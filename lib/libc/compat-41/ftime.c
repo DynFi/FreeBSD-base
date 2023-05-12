@@ -35,7 +35,15 @@ __FBSDID("$FreeBSD$");
 
 #include <sys/types.h>
 #include <sys/time.h>
+
+/* Let's not generate warnings about deprecation during libc build. */
+#ifdef __GNUC__
+#undef __GNUC__
 #include <sys/timeb.h>
+#define __GNUC__
+#else
+#include <sys/timeb.h>
+#endif
 
 int
 ftime(struct timeb *tbp)
