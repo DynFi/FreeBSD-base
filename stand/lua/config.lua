@@ -710,6 +710,12 @@ function config.readConf(file, loaded_files)
 			end
 		end
 	end
+
+	local loader_conf_smbios = getEnv("loader_conf_smbios")
+	if loader_conf_smbios ~= nil then
+		local name = loader_conf_smbios .. getEnv("smbios.planar.product")
+		config.readConf(name, loaded_files)
+	end
 end
 
 -- other_kernel is optionally the name of a kernel to load, if not the default
