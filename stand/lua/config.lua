@@ -712,8 +712,9 @@ function config.readConf(file, loaded_files)
 	end
 
 	local loader_conf_smbios = getEnv("loader_conf_smbios")
-	if loader_conf_smbios ~= nil then
-		local name = loader_conf_smbios .. getEnv("smbios.planar.product")
+	local dynfi_product = getEnv("smbios.planar.product")
+	if loader_conf_smbios ~= nil and dynfi_product ~= nil then
+		local name = loader_conf_smbios .. dynfi_product
 		config.readConf(name, loaded_files)
 	end
 end
