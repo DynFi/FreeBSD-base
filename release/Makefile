@@ -226,7 +226,7 @@ disc1: packagesystem
 # the ports tree doesn't like that
 # HACK: lately pkg fails to compile in weird way, do a hack version of extracting in
 # and replace /usr/sbin/pkg with a link
-	tar xzf ${.TARGET}/usr/freebsd-dist/dynfi/Latest/pkg.txz -C $$(realpath ${.TARGET})
+	tar xzf ${.TARGET}/usr/freebsd-dist/dynfi/Latest/pkg.pkg -C $$(realpath ${.TARGET})
 	rm $$(realpath ${.TARGET})/usr/sbin/pkg
 	ln -s /usr/local/sbin/pkg $$(realpath ${.TARGET})/usr/sbin/pkg
 .else
