@@ -2236,7 +2236,7 @@ create-kernel-packages-flavor${flavor:C,^""$,${_default_flavor},}: _pkgbootstrap
 		/version/ {print $$2; next } ' \
 		${KSTAGEDIR}/${DISTDIR}/kernel.${INSTALLKERNEL}${flavor}.ucl ; \
 	${PKG_CMD} -o ABI=${PKG_ABI} -o ALLOW_BASE_SHLIBS=yes \
-		-o OSVERSION="${SRCRELDATE}" \
+		-o OSVERSION="${SRCRELDATE}"  \
 		create -f ${PKG_FORMAT} \
 		-M ${KSTAGEDIR}/${DISTDIR}/kernel.${INSTALLKERNEL}${flavor}.ucl \
 		-p ${KSTAGEDIR}/${DISTDIR}/kernel.${INSTALLKERNEL}${flavor}.plist \

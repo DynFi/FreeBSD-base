@@ -11,6 +11,7 @@ export PKG_CMD=${PKG_CMD}
 export PKG_VERSION=${PKG_VERSION}
 export OSVERSION=${OSVERSION}
 export WRKDIR=$(make -C ${PORTSDIR}/ports-mgmt/pkg -V WRKDIR)
+export OSVERSION=${OSVERSION}
 
 make -C ${PORTSDIR}/ports-mgmt/pkg TARGET=${TARGET} TARGET_ARCH=${TARGET_ARCH} \
 	CONFIGURE_ARGS="--host=$(uname -m)-portbld-freebsd${REVISION}" \
