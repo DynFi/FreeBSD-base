@@ -51,7 +51,7 @@ f_include_lang $BSDCFG_LIBE/include/messages.subr
 # Default name of dialog(1) utility
 # NOTE: This is changed to "Xdialog" by the optional `-X' argument
 #
-DIALOG="dialog"
+DIALOG="bsddialog"
 
 #
 # Default dialog(1) title and backtitle text
