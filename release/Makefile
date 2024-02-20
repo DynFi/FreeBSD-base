@@ -215,7 +215,7 @@ disc1: packagesystem
 	mkdir ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	cp -RH ${REPODIR}/${REPONAME}/latest ${.TARGET}/usr/freebsd-dist/${REPONAME}/
 	# Dynfi: Remove packages that won't be installed and recreate the repo
-	rm ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/*-dev*
+	rm ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/*-dev-*
 	pkg repo ${.TARGET}/usr/freebsd-dist/${REPONAME}/latest/
 	# Dynfi: Copy the result of poudriere bulk
 	mkdir -p ${.TARGET}/usr/freebsd-dist/dynfi/All
