@@ -176,7 +176,7 @@ if [ ${PKGBASE_INSTALL} -eq 0 && -f $BSDINSTALL_DISTDIR/MANIFEST]; then
 #		done
 #	fi
 	exec 3>&1
-	EXTRA_DISTS=$( eval dialog \
+	EXTRA_DISTS=$( eval bsddialog \
 	    --backtitle \"DynFi Installer\" \
 	    --title \"Distribution Select\" --nocancel --separate-output \
 	    --checklist \"Choose optional system components to install:\" \
@@ -201,7 +201,7 @@ if [ ${PKGBASE_INSTALL} -eq 0 ]; then
 	FETCH_DISTRIBUTIONS=`echo $FETCH_DISTRIBUTIONS`	# Trim white space
 
 	if [ -n "$FETCH_DISTRIBUTIONS" -a -n "$BSDINSTALL_CONFIGCURRENT" ]; then
-		dialog --backtitle "DynFi Installer" --title "Network Installation" --msgbox "Some installation files were not found on the boot volume. The next few screens will allow you to configure networking so that they can be downloaded from the Internet." 0 0
+		bsddialog --backtitle "DynFi Installer" --title "Network Installation" --msgbox "Some installation files were not found on the boot volume. The next few screens will allow you to configure networking so that they can be downloaded from the Internet." 0 0
 		bsdinstall netconfig || error
 		NETCONFIG_DONE=yes
 	fi
@@ -345,7 +345,7 @@ esac
 #exec 3>&-
 if [ -z "${PARTMODE}" ]; then
 	exec 3>&1
-	PARTMODE=`echo $PMODES | xargs dialog --backtitle "DynFi Installer" \
+	PARTMODE=`echo $PMODES | xargs bsddialog --backtitle "DynFi Installer" \
 		--title "Partitioning" \
 		--item-help \
 		--menu "How would you like to partition your disk?" \
@@ -491,7 +491,7 @@ fi
 finalconfig() {
 	exec 3>&1
 	#REVISIT=$(dialog --backtitle "$OSNAME Installer" \
-	REVISIT=$(dialog --backtitle "DynFi Installer" \
+	REVISIT=$(bsddialog --backtitle "DynFi Installer" \
 	    --title "Final Configuration" --no-cancel --menu \
 	    "Setup of your $OSNAME system is nearly complete. You can now modify your configuration choices. After this screen, you will have an opportunity to make more complex changes using a shell." 0 0 0 \
 		"Exit" "Apply configuration and exit installer" \
