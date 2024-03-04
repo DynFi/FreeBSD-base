@@ -106,11 +106,7 @@ case $? in
 esac
 
 if [ ${IPV4_AVAIL} -eq 1 ]; then
-<<<<<<< HEAD
-	bsddialog --backtitle "$OSNAME Installer" --title 'Network Configuration' \
-=======
-	dialog --backtitle 'DynFi Installer' --title 'Network Configuration' \
->>>>>>> a863b9971895 (dynfi: Rename the title to DynFi Installer in the installer)
+	bsddialog --backtitle "DynFi Installer" --title 'Network Configuration' \
 	    --yesno 'Would you like to configure IPv4 for this interface?' 0 0
 	if [ $? -eq $BSDDIALOG_OK ]; then
 		bsdinstall netconfig_ipv4 ${INTERFACE} "${IFCONFIG_PREFIX}" || \
@@ -125,11 +121,7 @@ if [ ${IPV4_AVAIL} -eq 0 -a -n ${IFCONFIG_PREFIX} ]; then
 	echo ifconfig_${INTERFACE}=\"${IFCONFIG_PREFIX}\" >> $BSDINSTALL_TMPETC/._rc.conf.net
 fi
 if [ ${IPV6_AVAIL} -eq 1 ]; then
-<<<<<<< HEAD
-	bsddialog --backtitle "$OSNAME Installer" --title 'Network Configuration' \
-=======
-	dialog --backtitle 'DynFi Installer' --title 'Network Configuration' \
->>>>>>> a863b9971895 (dynfi: Rename the title to DynFi Installer in the installer)
+	bsddialog --backtitle "DynFi Installer" --title 'Network Configuration' \
 	    --yesno 'Would you like to configure IPv6 for this interface?' 0 0
 	if [ $? -eq $BSDDIALOG_OK ]; then
 		bsdinstall netconfig_ipv6 ${INTERFACE} || exec $0
@@ -194,11 +186,7 @@ else
 fi
 
 exec 3>&1
-<<<<<<< HEAD
 RESOLV=$(echo "${RESOLV}" | xargs -o bsddialog --backtitle "$OSNAME Installer" \
-=======
-RESOLV=$(echo "${RESOLV}" | xargs dialog --backtitle 'DynFi Installer' \
->>>>>>> a863b9971895 (dynfi: Rename the title to DynFi Installer in the installer)
 	--title 'Network Configuration' \
 	--mixedform 'Resolver Configuration' 0 0 0 \
 2>&1 1>&3)
