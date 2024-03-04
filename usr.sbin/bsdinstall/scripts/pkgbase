@@ -149,13 +149,13 @@ if [ ! -z "${kernel_list}" ]; then
 	done
 
 	if [ "${nkernels}" -gt 1 ]; then
-		exec 3>&1
+		exec 5>&1
 		KERN=$(bsddialog --backtitle "DynFi Installer" \
 			      --title "Kernel Selection" --nocancel \
 			      --radiolist "Choose kernel to enable:" \
 			      0 0 0 ${dialogarg} \
-			      2>&1 1>&3 )
-		exec 3>&-
+			      2>&1 1>&5 )
+		exec 5>&-
 		kernel-select -k ${BSDINSTALL_CHROOT}/boot switch ${KERN}
 	else
 		kernel-select -k ${BSDINSTALL_CHROOT}/boot switch ${kernels}
