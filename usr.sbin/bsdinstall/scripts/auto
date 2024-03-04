@@ -345,7 +345,7 @@ esac
 #exec 3>&-
 if [ -z "${PARTMODE}" ]; then
 	exec 5>&1
-	PARTMODE=`echo $PMODES | xargs bsddialog --backtitle "DynFi Installer" \
+	PARTMODE=`echo $PMODES | xargs -o bsddialog --backtitle "DynFi Installer" \
 		--title "Partitioning" \
 		--item-help \
 		--menu "How would you like to partition your disk?" \
