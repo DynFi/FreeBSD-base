@@ -39,6 +39,7 @@ main() {
 			;;
 		clang)
 			pkgdeps="lld libcompiler_rt-dev"
+			;;
 		caroot)
 			#pkgdeps="openssl"
 			pkgdeps="utilities"
