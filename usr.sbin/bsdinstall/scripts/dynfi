@@ -32,13 +32,13 @@ pkg_install() {
 	for item in ${pkg_list}; do
 		percentage=$((100 * n/total))
 		bsddialog --backtitle "DynFi Installer" --title "Installing $1 packages" --mixedgauge "Installing ${item}"  0 0 $percentage
-		pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install ${item} >/dev/null 2>&1
+		pkg -o ASSUME_ALWAYS_YES=yes -r ${BSDINSTALL_CHROOT} install ${item} >/dev/null 2>&1 || exit 1
 		n=$((n + 1))
 	done
 }
 
 # Install pkg into the new root
-pkg_list="pkg `pkg -r ${BSDINSTALL_CHROOT} search -Q depends-on dynfi/DynFi | tail -n +4 | xargs` DynFi"
+pkg_list="pkg `pkg -r ${BSDINSTALL_CHROOT} search -Q depends-on dynfi/DynFi | sed '/^[^\t]/d' | xargs` DynFi"
 pkg_install "DynFi"
 
 # TODO add this to the mtree files
