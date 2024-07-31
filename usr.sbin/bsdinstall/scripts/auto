@@ -476,7 +476,7 @@ if [ "$NETCONFIG_DONE" != yes ]; then
 # DynFi Not needed
 #	bsdinstall netconfig	# Don't check for errors -- the user may cancel
 fi
-[ -z "$BSDINSTALL_SKIP_TIME" ] && bsdinstall time
+#[ -z "$BSDINSTALL_SKIP_TIME" ] && bsdinstall time
 # DynFi Not needed
 #[ -z "$BSDINSTALL_SKIP_SERVICES" ] && bsdinstall services
 #[ -z "$BSDINSTALL_SKIP_HARDENING" ] && bsdinstall hardening
