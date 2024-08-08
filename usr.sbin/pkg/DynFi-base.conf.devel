@@ -1,5 +1,5 @@
 DynFi-base: {
-  url: "http://packages.dynfi.com/base-dev/${ABI}/latest",
+  url: "http://packages.dynfi.com/base-dev/FreeBSD:14:amd64/latest",
   enabled: yes,
   signature_type: "fingerprints",
   fingerprints: "/usr/share/DynFi/keys/pkg",
