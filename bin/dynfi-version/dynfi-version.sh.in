@@ -3,5 +3,6 @@
 set -e
 
 DYNFI_VERSION="@@DYNFI_VERSION@@"
+OPNSENSE_SUFFIX=`pkg-static info -x '.*-opnsense-core-.*' | awk -F'_' '{print $NF}' || 0`
 
-echo ${DYNFI_VERSION}
+echo ${DYNFI_VERSION}.${OPNSENSE_SUFFIX}
