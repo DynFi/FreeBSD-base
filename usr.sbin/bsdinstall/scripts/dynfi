@@ -62,6 +62,3 @@ pw -R ${BSDINSTALL_CHROOT} useradd ntopng -s /sbin/nologin -d /nonexistent -c "n
 chroot ${BSDINSTALL_CHROOT} chown ntopng:ntopng /usr/local/bin/ntopng-config
 chroot ${BSDINSTALL_CHROOT} chmod ugo+s /usr/local/bin/ntopng-config
 chroot ${BSDINSTALL_CHROOT} chown -R ntopng:ntopng /usr/local/etc/ntopng
-
-pw -R ${BSDINSTALL_CHROOT} groupadd snmpd 
-pw -R ${BSDINSTALL_CHROOT} useradd snmpd -s /sbin/nologin -d /nonexistent -c "ntopng user" -w no -g snmpd
