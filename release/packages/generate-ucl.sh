@@ -35,7 +35,8 @@ main() {
 			pkgdeps=""
 			;;
 		certctl)
-			pkgdeps="caroot openssl"
+			pkgdeps="caroot"
+			#pkgdeps="caroot openssl"
 			;;
 		clang)
 			pkgdeps="lld libcompiler_rt-dev"
