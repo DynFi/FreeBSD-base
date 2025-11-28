@@ -59,7 +59,7 @@ if [ -n "${BRANCH_OVERRIDE}" ]; then
 fi
 RELEASE="${REVISION}-${BRANCH}"
 VERSION="${TYPE} ${RELEASE}"
-DYNFI_VERSION="4.10"
+DYNFI_VERSION="4.11"
 
 if [ -z "${SYSDIR}" ]; then
 	SYSDIR=$(dirname $0)/..
